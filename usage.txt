@@ -1,0 +1,75 @@
+
+Usage:
+c2x-cmd    -s:FILE [-t[:FILE]] [-v] [-wn] [-wid] [-sep:SEPARATORS|-sep::#:] 
+           [-m:#] [-sup] [-e:ENCODING] [-cc:i2u|-cc:u2i] [-xmlns:[NSPFX=]NSURI] 
+           [-dtd:FILE|-xsd:FILE] [-styles:FILE[,...]] [-alias:TOKEN=NAME[,...]] 
+           [-cfg:FILE] [-V] [-?]
+
+c2x-cmd    -exec CFGFILE
+
+-s:FILE    SOURCE.csv file to convert ("-s:-" is STDIN)
+-t:FILE    TARGET.xml file to create  ("-t:-" is STDOUT)
+-t         use source's filename and replace its (last) file extension by ".xml"
+
+-sep:CHARS use character(s) as csv's value-separator (";" is default)
+-sep::#:   get csv's value-separator by ascii-number (e.g. "32" is "Space")
+-e:ENC     <?xml ... encoding="ENC"?> ("UTF-8" or "ISO-8859-1" (default))
+-cc:i2u    convert commandline from ISO to UTF
+-cc:u2i    convert commandline from UTF to ISO
+
+-m:#       MODES 1...5 for different XML output formats ("-m:1" is default):
+           1 = <eRecord><COLname>CELLvalue</ColName></eRecord>
+           2 = <eRecord><COLname aValue="CELLvalue"/></eRecord>
+           3 = <eRecord><eItem aName="COLname">CELLvalue</eItem></eRecord>
+           4 = <eRecord><eItem aName="COLname" aValue="CELLvalue"/></eRecord>
+           5 = <eRecord COLname="CELLvalue"/>
+
+-v         verbose mode (verbose information is send to STDERR)
+           to capture it you may redirect STDERR by writing : c2x-cmd OPTIONS 2>verbose.log
+
+-wn        write num="#" attribute to record-element ("#" is csv's row-number)
+-wid       write xml:id="id.#" attribute to record-element
+-sup       suppress empty elements
+
+-xmlns:[NSPFX=]NSURI
+           NSPFX = namespace prefix used for the document
+           NSURI = namespace Unified Ressource Identifier for the document
+           
+-dtd:FILE  include XML Document Type Definition <!DOCTYPE eRoot SYSTEM "FILE"> 
+-xsd:FILE  include XML Schema Definition attributes into root-element
+
+-styles:FILE[,...][,"["..."]"]
+           include processing-instruction(s) <?xml-stylesheet href="FILE"?> 
+           to reference CSS,XSL or any other kind of stylesheet-file
+           [FILE] in brackets makes <?xml-stylesheet alternate="yes" ...?>
+           
+-alias:TOKEN=NAME[,TOKEN=NAME,...]
+           comma-separated list of TOKEN=NAME pairs
+           to set alternative names for elements (e...) and attributes (a...)
+           TOKEN: eRoot, eRecord, eItem, aName, aValue, aSource, aDT, aID, aNum
+           eRoot=RootElementName
+               aSource=SourceFileAttrName (="filename")
+               aDT=SourceDateTimeAttrName (="YYYY-MM-DDThh:mm:ss±hh:mm")
+           eRecord=RecordElementName
+            *  aNum=RecordCounterAttrName (="#")
+            *  aID=RecordIDAttrName       (="id.#")
+           eItem=ItemElementName
+               aName=NameAttrName         (="colname")
+               aValue=ValueAttrName       (="cellvalue")
+           
+            *  presence includes attribute into output/target
+               absence excludes attribute from output/target only 
+               if you don't use -wn or -wid option
+
+-cfg:FILE  use configuration-file to set options
+           filed options are included at position of "-cfg",
+           may overwrite preceding and be overwritten by following options
+           the "last in line" of repeated options makes the setting
+-exec      for auto-configuration as "shebang"-execution (#!c2x-cmd -exec)
+
+-V         copyright and version info
+-?         this usage info
+
+You may refer the c2x-cmd.pdf for detailed information
+If you can't find this document you may download it from http://www.goedeke.net
+

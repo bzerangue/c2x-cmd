@@ -1,0 +1,17 @@
+#!/bin/bash
+cdir=`dirname $0`
+pdir=$PWD
+echo "#######################################"
+echo "Caution :"
+echo "\"csv2xml\" has been renamed to \"c2x-cmd\""
+echo "#######################################"
+echo "calling c2x-cmd..."
+echo " "
+if [ -n $cdir ]; then
+        tdir=$pdir
+elif [ `echo $cdir | cut -b2` = './' ]; then
+	tdir=$pdir"/"$cdir
+else
+	tdir=$cdir
+fi
+$tdir/c2x-cmd $@

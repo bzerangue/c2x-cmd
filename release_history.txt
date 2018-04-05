@@ -1,0 +1,89 @@
+
+C2X-CMD V1.8.0 - Freeware by Jens Goedeke
+Commandline version (c) 2002-2007
+Homepage : http://www.goedeke.net
+--------------------------------------------------------------------------------------
+Features:
+
+V1.8.0: (2007-12-16)
+	-> new	  : Name changed from "csv2xml" to "c2x-cmd"
+	-> new	  : automatic stylesheet type detection (-xsl Option is replaced by -styles Option)
+	-> new	  : -s:- reads source information from STDIN
+	-> new	  : -t:- writes target information to STDOUT
+	-> new    : -t use source's filename and replace its (last) file extension by ".xml"
+	-> new    : -wid option writes xml:id="id.#" attribute to record-element
+	-> new    : -wn option writes num="#" attribute to record-element ("#" is csv's row-number)
+	-> new    : -cfg:FILE option if you like to use configuration-files to set options	
+	-> new    : -exec option to execute config file
+	-> new    : system or file time is written to xml root element
+	-> update : -alias option has more tokens to change
+	-> update : -sep::#: option allows you now to use any character (0..255) as separator
+	-> bugfix : Illegal Elementnames are corrected now
+	-> bugfix : Bug in quotation mark handling is removed
+	
+	In Verbose mode all Messages are printed to stdlog and not to stdout anymore 
+	If you have to sent this output to a file or anything else you might use:
+	c2x-cmd ... 2>my-verbose.log
+	 
+
+V1.7.0: (2006-07-12)
+	-> new    : Aliases can be given for all items (see example files)
+	-> Bugfix : function that removes quotation marks correctly (v1.5.2) has to be reimplemented 
+				because of overwriting the source codes :-/
+
+V1.6.4: (2005-11-02)
+	-> Bugfix : XML Character conversion function ends before converting the complete string
+
+V1.6.3: (2005-05-08)
+	-> Bugfix : UTF8 Support in XML Character conversion function
+
+V1.6.2: (2005-04-17)
+	-> UTF16 and UTF32 file header (BOM) are now detected (but not supported yet)
+
+V1.6.1: (2005-04-06)
+	-> Bugfix : ASCII Separators must have at least 2 digits in version 1.6.0, now it's not necessary anymore
+	-> Bugfix : UTF-8 Handling converts characters from 0x80 to 0x9f wrong, this error is fixed
+
+V1.6.0: (2005-03-12)
+	-> ASCII characters from 1 to 32 can be now used as separators. To do this the decimal value of the
+	   ASCII character must be enclosed by colons => "-sep::32:" means SPACE and "-sep::9:" means TAB
+
+V1.5.2: (2005-02-08)
+	-> Now all single quotation marks are removed from target string
+		(e.g.: >"hello ""you"""< / before : >hello ""you""< / new : >hello "you"<)
+
+V1.5.1: (2005-02-07)
+	-> Bugfix : Bug in active conversion from UTF-8 to UTF8 has been removed
+	-> Bugfix : Bug in active conversion from ANSI to ANSI has been removed
+
+V1.5.0: (2005-02-03)
+	-> Embedding of active encoding for UTF-8 and ISO-8859-1 (ANSI) files
+	   (csv2xml does an active conversion of ISO-8859-1 to UTF-8 and reverse if necessary)
+	-> Bugfix : csv2xml now detects UTF file header
+	   (UTF file header are not treated as part of the first header item anymore)
+
+V1.4.0: (2005-01-29)
+	-> Support of CR/LF and NL within csv lines (see examples)
+
+V1.3.1:
+	-> Update of the internal XML Conformance function :
+	   Output is now only corrected if it's really necessary
+
+V1.3:
+	-> Embedding of XML Stylesheet Language (xsl) files
+	-> Embedding and Attaching of Namespaces
+	-> Embedding Document Type Definition (dtd) files for validating
+	-> Embedding XML Schema Definition (xsd) files for validating
+	-> Information is only printed if verbose option (-v) is given
+	-> A new output mode has been implemented : "Attributes with Values" (mode 5)
+	-> Default separator is now only ";"
+
+Version Jump...
+
+V1.0a:
+	-> Minor Bugfixes
+
+
+V1.0: (2002)
+	-> First Release
+

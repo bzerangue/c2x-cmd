@@ -1,0 +1,15 @@
+<!ELEMENT Kapitel EMPTY >
+<!ATTLIST Kapitel value CDATA #REQUIRED >
+
+<!ELEMENT Vers EMPTY >
+<!ATTLIST Vers value CDATA #REQUIRED >
+
+<!ELEMENT Text EMPTY >
+<!ATTLIST Text value CDATA #REQUIRED >
+
+<!ELEMENT csv_data_records ( record+ ) >
+<!ATTLIST csv_data_records source NMTOKEN #REQUIRED >
+
+<!ELEMENT record ( Name, Firstname, Address, City, Country, Tel, Properties, Email ) >
+<!ATTLIST record num NMTOKEN #REQUIRED >
+
